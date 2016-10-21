@@ -10,18 +10,18 @@
 			var script = document.createElement("script");
 			script.innerHTML = `
 			function _jsonp_loader_callback_request_1(json) {
-			  alert(json.videos[1].url);
+				alert(json.videos[1].url);
 			}
 			(function() {
-			  var el = document.getElementById("catchup");
-			  if (el) {
-			   var id = el.href.match(/video\/(.*)@/)[1];
-			   //alert(id);
-			   //var id = 147338657;
-			   var script = document.createElement("script");
-			   script.src = "http://sivideo.webservices.francetelevisions.fr/tools/getInfosOeuvre/v2/?idDiffusion=" + id + "&catalogue=Info-web&callback=_jsonp_loader_callback_request_1";
-			   document.getElementsByTagName("head")[0].appendChild(script);
-			  }
+				var el = document.getElementById("catchup");
+				if (el) {
+					var id = el.href.match(/video\/(.*)@/)[1];
+					//alert(id);
+					//var id = 147338657;
+					var script = document.createElement("script");
+					script.src = "http://sivideo.webservices.francetelevisions.fr/tools/getInfosOeuvre/v2/?idDiffusion=" + id + "&catalogue=Info-web&callback=_jsonp_loader_callback_request_1";
+					document.getElementsByTagName("head")[0].appendChild(script);
+				}
 			})();`;
 			document.getElementsByTagName("head")[0].appendChild(script);
 		</script>

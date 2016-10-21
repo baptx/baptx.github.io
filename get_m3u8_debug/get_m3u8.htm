@@ -2,17 +2,17 @@
 <html>
 	<head>
 		<meta charset="utf-8"> 
-		<title>GreaseMonkey get_m3u8</title>
+		<title>GreaseMonkey get_m3u8 working (Content Script Injection)</title>
 	</head>
 	<body>
 		<a style="display: none; width: 840px; height: 472px;" href="http://videos.francetv.fr/video/147338657@Info-web" id="catchup" class="video"></a>
 		<script>
-			function _jsonp_loader_callback_request_1(json)
+			window._jsonp_loader_callback_request_1 = function(json)
 			{
-			  alert(json.videos[1].url);
+				alert(json.videos[1].url);
 			}
-			
-			function get_m3u8()
+
+			window.get_m3u8 = function()
 			{
 				var el = document.getElementById("catchup");
 				if (el) {
@@ -22,14 +22,8 @@
 					document.getElementsByTagName("head")[0].appendChild(script);
 				}
 			}
-			
-			var script = document.createElement("script");
-			script.appendChild(document.createTextNode(_jsonp_loader_callback_request_1));
-			document.getElementsByTagName("head")[0].appendChild(script);
-			
-			var script = document.createElement("script");
-			script.appendChild(document.createTextNode('(' + get_m3u8 + ')();'));
-			document.getElementsByTagName("head")[0].appendChild(script);
+
+			get_m3u8();
 		</script>
 	</body>
 </html>
