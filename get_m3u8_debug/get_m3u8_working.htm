@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"> 
+		<title>GreaseMonkey get_m3u8 working (Content Scope Runner)</title>
+	</head>
+	<body>
+		<a style="display: none; width: 840px; height: 472px;" href="http://videos.francetv.fr/video/147338657@Info-web" id="catchup" class="video"></a>
+		<script>
+			function _jsonp_loader_callback_request_1(json)
+			{
+				alert(json.videos[1].url);
+			}
+			
+			function get_m3u8()
+			{
+				var el = document.getElementById("catchup");
+				if (el) {
+					var id = el.href.match(/video\/(.*)@/)[1];
+					var script = document.createElement("script");
+					script.src = "http://sivideo.webservices.francetelevisions.fr/tools/getInfosOeuvre/v2/?idDiffusion=" + id + "&catalogue=Info-web&callback=_jsonp_loader_callback_request_1";
+					document.getElementsByTagName("head")[0].appendChild(script);
+				}
+			}
+			
+			var script = document.createElement("script");
+			script.appendChild(document.createTextNode(_jsonp_loader_callback_request_1));
+			document.getElementsByTagName("head")[0].appendChild(script);
+			
+			var script = document.createElement("script");
+			script.appendChild(document.createTextNode('(' + get_m3u8 + ')();'));
+			document.getElementsByTagName("head")[0].appendChild(script);
+		</script>
+	</body>
+</html>
