@@ -14,11 +14,14 @@
 			alert("test 1 - regex without slash: " + id);
 
 			var script = document.createElement("script");
-			script.innerHTML = `
+			var text = `
 			(function() {
 				var id = el.href.match(/id-video=(.*)@/)[1];
 				alert("test 2 - regex without slash as text: " + id);
 			})();`;
+			
+			script.appendChild(document.createTextNode(text));
+			
 			document.getElementsByTagName("head")[0].appendChild(script);
 			
 			
@@ -28,11 +31,16 @@
 			alert("test 3 - regex with slash: " + id);
 
 			var script = document.createElement("script");
-			script.innerHTML = `
+			var text = `
 			(function() {
 				var id = el.href.match(/video\/(.*)@/)[1];
 				alert("test 4 - regex with slash as text: " + id);
 			})();`;
+			
+			script.appendChild(document.createTextNode(text));
+			//script.textContent = text;
+			//script.innerHTML = text;			
+			
 			document.getElementsByTagName("head")[0].appendChild(script);
 		</script>
 	</body>
